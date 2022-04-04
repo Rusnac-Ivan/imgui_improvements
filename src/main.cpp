@@ -80,7 +80,8 @@ int main(int, char**)
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
     // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
+    //ImGui::StyleColorsDark();
+    ImGui::StyleColorsClassic();
     //ImGui::StyleColorsClassic();
 
     // Setup Platform/Renderer backends
@@ -127,8 +128,12 @@ int main(int, char**)
             ImGui::ShowDemoWindow(&show_demo_window);
 
         // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
+        ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(15.f/255.f, 19.f / 255.f, 22.f / 255.f, 1.f));
+        ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.f / 255.f, 95.f / 255.f, 54.f / 255.f, 1.f));
         {
-            static float f = 0.0f;
+            ImGui::Begin("Hello, world!");
+
+            /*static float f = 0.0f;
             static int counter = 0;
 
             ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
@@ -145,14 +150,29 @@ int main(int, char**)
             ImGui::SameLine();
             ImGui::Text("counter = %d", counter);
 
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);*/
 
-            ImGui::ColoredButtonV1("Hello", ImVec2(100.f, 30.f), IM_COL32(255, 255, 255, 255), IM_COL32(220, 70, 60, 255), IM_COL32(180, 40, 90, 255));
+            ImVec2 button_size = ImVec2(100.f, 30.f);
 
-            ImGui::ColoredButtonV1("You", ImVec2(100.f, 30.f), IM_COL32(255, 255, 255, 255), IM_COL32(50, 220, 60, 255), IM_COL32(69, 150, 70, 255));
+            ImGui::Dummy(ImVec2((ImGui::GetWindowWidth() - button_size.x) / 2.f, 30.f));
+            ImGui::SameLine();
+            ImGui::ColoredButtonV1("Save", button_size, IM_COL32(255, 255, 255, 255), IM_COL32(220, 70, 60, 255), IM_COL32(160, 30, 70, 255));
+
+            ImGui::Dummy(ImVec2(30.f, 30.f));
+
+            ImGui::Dummy(ImVec2((ImGui::GetWindowWidth() - button_size.x) / 2.f, 30.f));
+            ImGui::SameLine();
+            ImGui::ColoredButtonV1("Cancel", button_size, IM_COL32(255, 255, 255, 255), IM_COL32(50, 220, 60, 255), IM_COL32(69, 150, 70, 255));
+
+            ImGui::Dummy(ImVec2(30.f, 30.f));
+
+            ImGui::Dummy(ImVec2((ImGui::GetWindowWidth() - button_size.x) / 2.f, 30.f));
+            ImGui::SameLine();
+            ImGui::ColoredButtonV1("Confirm", button_size, IM_COL32(255, 255, 255, 255), IM_COL32(0, 210, 255, 255), IM_COL32(56, 124, 213, 255));
 
             ImGui::End();
         }
+        ImGui::PopStyleColor(2);
 
         // 3. Show another simple window.
         if (show_another_window)
